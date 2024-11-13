@@ -8,25 +8,26 @@
 #include "meta_subscriber.h"
 
 namespace tx_nodes {
-class meta_publisher {
+
+class MetaPublisher {
 private:
 protected:
     // push meta to next nodes
-    virtual void push_meta(std::shared_ptr<tx_objects::tx_meta> meta);
+    virtual void push_meta(std::shared_ptr<tx_objects::Meta> meta);
 
     // non-copyable for all child class
-    std::mutex subscribers_lock;
+    std::mutex subscribers_lock_;
     // next nodes as subscribers
-    std::vector<std::shared_ptr<vp_meta_subscriber>> subscribers;
+    std::vector<std::shared_ptr<MetaSubscriber>> subscribers_;
 
 public:
-    vp_meta_publisher(/* args */);
-    ~vp_meta_publisher();
+    MetaPublisher(/* args */);
+    ~MetaPublisher();
 
     // add next node
-    void add_subscriber(std::shared_ptr<vp_meta_subscriber> subscriber);
+    void add_subscriber(std::shared_ptr<MetaSubscriber> subscriber);
     // remove next node
-    void remove_subscriber(std::shared_ptr<vp_meta_subscriber> subscriber);
+    void remove_subscriber(std::shared_ptr<MetaSubscriber> subscriber);
 };
 
 } // namespace tx_nodes
