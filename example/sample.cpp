@@ -10,6 +10,8 @@ using namespace tx_utils;
 
 int main() {
     SET_LOG_INCLUDE_CODE_LOCATION(false);
+    SET_LOG_INCLUDE_THREAD_ID(false);
+    LOGGER_INIT();
 
     std::cout << "finish!!!" << std::endl;
     return 0;

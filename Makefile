@@ -13,10 +13,7 @@ DEBUG_FLAGS = $(FLAGS) -DCMAKE_BUILD_TYPE:STRING=Debug
 RELEASE_FLAGS = $(FLAGS) -DCMAKE_BUILD_TYPE:STRING=Release
 
 all : 
-	$(CMAKE_CMD) && make -j8
-
-build:
-	@$(CMAKE_MAKE) && make -s -j$(NUM_JOBS)
+	@$(CMAKE_CMD) && make -s -j8
 
 run :
 	@cd build/bin && ./$(PRO) 

@@ -106,6 +106,7 @@ public:
 
 // config Macros
 #define SET_LOG_INCLUDE_CODE_LOCATION(_include_code_location) tx_utils::tx_logger::get_logger().include_code_location = _include_code_location
+#define SET_LOG_INCLUDE_THREAD_ID(_include_thread_id) tx_utils::tx_logger::get_logger().include_thread_id = _include_thread_id
 
 // log Macros
 // use tx_utils::string_format to format log content first if need
@@ -115,5 +116,8 @@ public:
 #define TX_WARN(message) tx_utils::tx_logger::get_logger().log(tx_utils::tx_log_level::WARN, message, __FILE__, __LINE__)
 #define TX_INFO(message) tx_utils::tx_logger::get_logger().log(tx_utils::tx_log_level::INFO, message, __FILE__, __LINE__)
 #define TX_DEBUG(message) tx_utils::tx_logger::get_logger().log(tx_utils::tx_log_level::DEBUG, message, __FILE__, __LINE__)
+
+// init Macros
+#define LOGGER_INIT() tx_utils::tx_logger::get_logger().init()
 
 } // namespace tx_utils
