@@ -19,44 +19,44 @@
 
 namespace tx_nodes {
 // node type
-enum node_type {
+enum NodeType {
     SRC, // src node, must not have input branchs
     DES, // des node, must not have output branchs
     MID  // middle node, can have input and output branchs
 };
 
 // base class for all nodes
-class node : public vp_meta_publisher,
-             public vp_meta_subscriber,
-             public vp_meta_hookable,
-             public std::enable_shared_from_this<vp_node> {
+class Node : public MetaPublisher,
+             public MetaSubscriber,
+             public MetaHookable,
+             public std::enable_shared_from_this<Node> {
 private:
     // previous nodes
-    std::vector<std::shared_ptr<vp_node>> pre_nodes;
+    std::vector<std::shared_ptr<Node>> pre_nodes_;
 
     // handle thread
-    std::thread handle_thread;
+    std::thread handle_thread_;
     // dispatch thread
-    std::thread dispatch_thread;
+    std::thread dispatch_thread_;
 
 protected:
     // alive or not for node
-    bool alive = true;
+    bool alive_ = true;
 
     // by default we handle frame meta one by one, in some situations we need handle them batch by batch(such as vp_infer_node).
     // setting this member greater than 1 means the node will handle frame meta with batch, and vp_node::handle_frame_meta_by_batch(...) will be called other than vp_node::handle_frame_meta(...).
     // note: control meta is not allowed like above, only one by one supported.
-    int frame_meta_handle_batch = 1;
+    int frame_meta_handle_batch_ = 1;
 
     // cache input meta from previous nodes
-    std::queue<std::shared_ptr<vp_objects::vp_meta>> in_queue;
+    std::queue<std::shared_ptr<tx_objects::Meta>> in_queue_;
     //
-    std::mutex in_queue_lock;
+    std::mutex in_queue_lock_;
     // cache output meta to next nodes
-    std::queue<std::shared_ptr<vp_objects::vp_meta>> out_queue;
+    std::queue<std::shared_ptr<tx_objects::Meta>> out_queue_;
 
     // synchronize for in_queue
-    vp_utils::vp_semaphore in_queue_semaphore;
+    tx_utils::semaphore in_queue_semaphore;
     // synchronize for out_queue
     vp_utils::vp_semaphore out_queue_semaphore;
 

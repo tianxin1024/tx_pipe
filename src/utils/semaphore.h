@@ -6,9 +6,9 @@
 namespace tx_utils {
 // semaphore for queue/deque data structures in VideoPipe, used for producer-consumer pattern.
 // it blocks the consumer thread until data has come.
-class tx_semaphore {
+class Semaphore {
 public:
-    tx_semaphore() {
+    Semaphore() {
         count_ = 0;
     }
 

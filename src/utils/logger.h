@@ -28,7 +28,7 @@ enum tx_log_level {
 class tx_logger {
 private:
     std::queue<std::string> log_cache;
-    tx_utils::tx_semaphore log_cache_semaphore;
+    tx_utils::Semaphore log_cache_semaphore;
     std::mutex log_cache_mutex;
     std::thread log_writer_th;
 
