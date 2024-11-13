@@ -2,60 +2,60 @@
 
 namespace tx_utils {
 
-tx_log_file_writer::tx_log_file_writer() {
+LogFileWriter::LogFileWriter() {
 }
 
-tx_log_file_writer::~tx_log_file_writer() {
-    if (log_writer.is_open()) {
-        log_writer.close();
+LogFileWriter::~LogFileWriter() {
+    if (log_writer_.is_open()) {
+        log_writer_.close();
     }
 }
 
-void tx_log_file_writer::init(std::string log_dir, std::string log_file_name_template) {
-    this->log_dir = log_dir;
-    this->log_file_name_template = log_file_name_template;
+void LogFileWriter::init(std::string log_dir, std::string log_file_name_template) {
+    this->log_dir_ = log_dir;
+    this->log_file_name_template_ = log_file_name_template;
 
     // open log file first time
     auto f = create_valid_log_file_name();
-    log_writer.open(f, std::ofstream::out | std::ofstream::app);
+    log_writer_.open(f, std::ofstream::out | std::ofstream::app);
 
-    inited = true;
+    inited_ = true;
 }
 
-void tx_log_file_writer::write(std::string log) {
-    if (!inited) {
+void LogFileWriter::write(std::string log) {
+    if (!inited_) {
         throw "tx_log_file_writer not initialized!";
     }
 
     // check if need create new log file
-    if (get_now_day() != log_day) {
-        if (log_writer.is_open()) {
-            log_writer.close();
+    if (get_now_day() != log_day_) {
+        if (log_writer_.is_open()) {
+            log_writer_.close();
         }
 
         auto f = create_valid_log_file_name();
-        log_writer.open(f, std::ofstream::out | std::ofstream::app);
+        log_writer_.open(f, std::ofstream::out | std::ofstream::app);
     }
 
-    log_writer << log << std::endl;
+    log_writer_ << log << std::endl;
 }
 
-std::string tx_log_file_writer::create_valid_log_file_name() {
-    if (!std::experimental::filesystem::exists(log_dir)) {
-        std::experimental::filesystem::create_directories(log_dir);
+std::string LogFileWriter::create_valid_log_file_name() {
+    if (!std::experimental::filesystem::exists(log_dir_)) {
+        std::experimental::filesystem::create_directories(log_dir_);
     }
-    std::experimental::filesystem::path root_dir(log_dir);
+    std::experimental::filesystem::path root_dir(log_dir_);
 
-    auto f_name = tx_utils::time_format(NOW, log_file_name_template);
+    auto f_name = tx_utils::time_format(NOW, log_file_name_template_);
     auto p = root_dir / f_name;
 
     // cache log start day
-    log_day = get_now_day();
+    log_day_ = get_now_day();
 
     return p.string();
 }
 
-int tx_log_file_writer::get_now_day() {
+int LogFileWriter::get_now_day() {
     std::vector<int> time_parts;
     tx_utils::time_split(NOW, time_parts);
 
@@ -63,7 +63,7 @@ int tx_log_file_writer::get_now_day() {
     return time_parts[2];
 }
 
-tx_log_file_writer &tx_log_file_writer::operator<<(std::string log) {
+LogFileWriter &LogFileWriter::operator<<(std::string log) {
     write(log);
     return *this;
 }

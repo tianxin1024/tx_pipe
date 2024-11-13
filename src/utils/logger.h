@@ -49,7 +49,7 @@ private:
     void log_write_run();
 
     // file writer
-    tx_utils::tx_log_file_writer file_writer_;
+    tx_utils::LogFileWriter file_writer_;
 
     const std::map<LogLevel, std::string> log_level_names_ = {{ERROR, "Error"},
                                                               {WARN, "Warn "},
