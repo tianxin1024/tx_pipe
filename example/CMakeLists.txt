@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.10)
+
+add_executable(demo sample.cpp)
+set_property(TARGET demo PROPERTY POSITION_INDEPENDENT_CODE  ON)
+target_link_libraries(demo PUBLIC logger)
