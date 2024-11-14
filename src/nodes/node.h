@@ -14,8 +14,8 @@
 #include "meta_publisher.h"
 #include "meta_hookable.h"
 #include "objects/control_meta.h"
-#include "../objects/vp_frame_meta.h"
-#include "../excepts/vp_invalid_calling_error.h"
+#include "objects/frame_meta.h"
+#include "utils/invalid_calling_error.h"
 
 namespace tx_nodes {
 // node type
@@ -72,10 +72,10 @@ protected:
     virtual std::shared_ptr<tx_objects::Meta> handle_frame_meta(std::shared_ptr<tx_objects::FrameMeta> meta);
     // define how to handle control meta, ignored in src nodes.
     // return nullptr means do not push it to next nodes, such as des nodes which have no next nodes.
-    virtual std::shared_ptr<tx_objects::vp_meta> handle_control_meta(std::shared_ptr<vp_objects::vp_control_meta> meta);
+    virtual std::shared_ptr<tx_objects::Meta> handle_control_meta(std::shared_ptr<tx_objects::ControlMeta> meta);
 
     // define how to handle frame meta [batch by batch], ignored in src nodes.
-    virtual void handle_frame_meta(const std::vector<std::shared_ptr<tx_objects::vp_frame_meta>> &meta_with_batch);
+    virtual void handle_frame_meta(const std::vector<std::shared_ptr<tx_objects::FrameMeta>> &meta_with_batch);
 
     // called by child classes after all resources have been initialized (in the last constructor of chain).
     void initialized();

@@ -6,3 +6,8 @@ set_property(TARGET meta_subscriber PROPERTY POSITION_INDEPENDENT_CODE ON)
 add_library(meta_publisher STATIC meta_publisher.cpp)
 set_property(TARGET meta_publisher PROPERTY POSITION_INDEPENDENT_CODE ON)
 target_link_libraries(meta_publisher PUBLIC meta_subscriber)
+
+add_library(node STATIC node.cpp)
+set_property(TARGET node PROPERTY POSITION_INDEPENDENT_CODE ON)
+target_link_libraries(node PUBLIC meta_subscriber utils logger metapublisher meta_hookable control_meta frame_meta)
+
