@@ -1,14 +1,13 @@
 #pragma once
 
-#include "node.h"
-#include "stream_info_hookable.h"
-#include "../excepts/vp_not_implemented_error.h"
-#include "../excepts/vp_invalid_calling_error.h"
-#include "../utils/vp_gate.h"
+#include "nodes/node.h"
+#include "nodes/stream_info_hookable.h"
+#include "utils/invalid_error.h"
+#include "utils/gate.h"
 
-namespace nodes {
+namespace tx_nodes {
 // base class for src nodes, start point of meta/pipeline
-class src_node : public node, public stream_info_hookable {
+class SrcNode : public Node, public StreamInfoHookable {
 private:
     /* data */
 
@@ -16,36 +15,36 @@ protected:
     // force re-implemetation in child class
     virtual void handle_run() override;
     // force ignored in child class
-    virtual std::shared_ptr<vp_objects::vp_meta> handle_frame_meta(std::shared_ptr<vp_objects::vp_frame_meta> meta) override;
+    virtual std::shared_ptr<tx_objects::Meta> handle_frame_meta(std::shared_ptr<tx_objects::FrameMeta> meta) override;
     // force ignored in child class
-    virtual std::shared_ptr<vp_objects::vp_meta> handle_control_meta(std::shared_ptr<vp_objects::vp_control_meta> meta) override;
+    virtual std::shared_ptr<tx_objects::Meta> handle_control_meta(std::shared_ptr<tx_objects::ControlMeta> meta) override;
 
     // protected as it can't be instanstiated directly.
-    vp_src_node(std::string node_name,
-                int channel_index,
-                float resize_ratio = 1.0);
+    SrcNode(std::string node_name,
+            int channel_index,
+            float resize_ratio = 1.0);
 
     // basic stream info
-    int original_fps = -1;
-    int original_width = 0;
-    int original_height = 0;
+    int original_fps_ = -1;
+    int original_width_ = 0;
+    int original_height_ = 0;
 
     // basic channel info
-    int frame_index;
-    int channel_index;
-    float resize_ratio;
+    int frame_index_;
+    int channel_index_;
+    float resize_ratio_;
 
     // control to work or not
     // all derived class need depend on the value to check if work or not (start/stop)
-    vp_utils::vp_gate gate;
+    tx_utils::Gate gate_;
 
     // new logic for sending dead flag
     virtual void deinitialized() override;
 
 public:
-    ~vp_src_node();
+    ~SrcNode();
 
-    virtual vp_node_type node_type() override;
+    virtual NodeType node_type() override;
 
     // start signal to pipeline
     void start();
@@ -68,4 +67,4 @@ public:
     int get_original_height() const;
 };
 
-} // namespace nodes
+} // namespace tx_nodes

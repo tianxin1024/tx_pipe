@@ -11,11 +11,11 @@
 #include "utils/semaphore.h"
 #include "utils/utils.h"
 #include "utils/logger.h"
-#include "meta_publisher.h"
-#include "meta_hookable.h"
+#include "nodes/meta_publisher.h"
+#include "nodes/meta_hookable.h"
 #include "objects/control_meta.h"
 #include "objects/frame_meta.h"
-#include "utils/invalid_calling_error.h"
+#include "utils/invalid_error.h"
 
 namespace tx_nodes {
 // node type
