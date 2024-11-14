@@ -12,6 +12,8 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+add_compile_options(-Wno-deprecated-declarations)
 
 # OpenCV required
 find_package(OpenCV 4.6 REQUIRED)
