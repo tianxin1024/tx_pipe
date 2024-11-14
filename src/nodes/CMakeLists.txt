@@ -14,3 +14,7 @@ target_link_libraries(node PUBLIC meta_subscriber logger metapublisher meta_hook
 add_library(src_node STATIC src_node.cpp)
 set_property(TARGET src_node PROPERTY POSITION_INDEPENDENT_CODE ON)
 target_link_libraries(src_node PUBLIC node)
+
+add_library(file_src_node STATIC file_src_node.cpp)
+set_property(TARGET file_src_node PROPERTY POSITION_INDEPENDENT_CODE ON)
+target_link_libraries(file_src_node PUBLIC src_node)
