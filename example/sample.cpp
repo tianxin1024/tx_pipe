@@ -16,7 +16,13 @@ int main() {
 
     // create nodes
     auto file_src_0 = std::make_shared<tx_nodes::FileSrcNode>(
-        "file_src_0", 0, "../../workspace/face.mp4", 0.6);
+        "file_src_0", 0, "../../workspace/video/face.mp4", 0.6);
+
+    file_src_0->start();
+
+    // for debug purpose
+    // tx_utils::vp_analysis_board board({file_src_0});
+    // board.display(1, false);
 
     std::cout << "finish!!!" << std::endl;
     return 0;
