@@ -13,9 +13,9 @@
 #include "utils/logger.h"
 #include "meta_publisher.h"
 #include "meta_hookable.h"
-// #include "../objects/vp_control_meta.h"
-// #include "../objects/vp_frame_meta.h"
-// #include "../excepts/vp_invalid_calling_error.h"
+#include "objects/control_meta.h"
+#include "../objects/vp_frame_meta.h"
+#include "../excepts/vp_invalid_calling_error.h"
 
 namespace tx_nodes {
 // node type
@@ -56,9 +56,9 @@ protected:
     std::queue<std::shared_ptr<tx_objects::Meta>> out_queue_;
 
     // synchronize for in_queue
-    tx_utils::semaphore in_queue_semaphore;
+    tx_utils::Semaphore in_queue_semaphore_;
     // synchronize for out_queue
-    vp_utils::vp_semaphore out_queue_semaphore;
+    tx_utils::Semaphore out_queue_semaphore_;
 
     // get meta from in_queue, handle meta and put them into out_queue looply.
     // we need re-implement(define how to create meta and put it into out_queue) in src nodes since they have no previous nodes.
@@ -69,13 +69,13 @@ protected:
 
     // define how to handle frame meta [one by one], ignored in src nodes.
     // return nullptr means do not push it to next nodes, such as des nodes which have no next nodes.
-    virtual std::shared_ptr<vp_objects::vp_meta> handle_frame_meta(std::shared_ptr<vp_objects::vp_frame_meta> meta);
+    virtual std::shared_ptr<tx_objects::Meta> handle_frame_meta(std::shared_ptr<tx_objects::FrameMeta> meta);
     // define how to handle control meta, ignored in src nodes.
     // return nullptr means do not push it to next nodes, such as des nodes which have no next nodes.
-    virtual std::shared_ptr<vp_objects::vp_meta> handle_control_meta(std::shared_ptr<vp_objects::vp_control_meta> meta);
+    virtual std::shared_ptr<tx_objects::vp_meta> handle_control_meta(std::shared_ptr<vp_objects::vp_control_meta> meta);
 
     // define how to handle frame meta [batch by batch], ignored in src nodes.
-    virtual void handle_frame_meta(const std::vector<std::shared_ptr<vp_objects::vp_frame_meta>> &meta_with_batch);
+    virtual void handle_frame_meta(const std::vector<std::shared_ptr<tx_objects::vp_frame_meta>> &meta_with_batch);
 
     // called by child classes after all resources have been initialized (in the last constructor of chain).
     void initialized();
@@ -85,22 +85,22 @@ protected:
     // push meta to the back of out_queue, then it will be pushed to next nodes in order.
     // take care it's different from vp_node::push_meta(meta) which will push meta to next nodes directly.
     // the method can be called ONLY in handle thread inside node.
-    void pendding_meta(std::shared_ptr<vp_objects::vp_meta> meta);
+    void pendding_meta(std::shared_ptr<tx_objects::Meta> meta);
 
     // protected as it can't be instanstiated directly.
-    vp_node(std::string node_name);
+    Node(std::string node_name);
 
 public:
-    virtual ~vp_node();
+    virtual ~Node();
     // clear meaningful string, such as 'file_src_0' stands for file source node at channel 0.
-    std::string node_name;
+    std::string node_name_;
 
     // receive meta from previous nodes,
     // we can hook(such as modifying meta) in child class but do not forget calling vp_node.meta_flow(...) followly.
-    virtual void meta_flow(std::shared_ptr<vp_objects::vp_meta> meta) override;
+    virtual void meta_flow(std::shared_ptr<tx_objects::Meta> meta) override;
 
     // retrive current node type
-    virtual vp_node_type node_type();
+    virtual NodeType node_type();
 
     // detach myself from all previous nodes
     void detach();
@@ -109,10 +109,10 @@ public:
     // detach myself from all previous nodes AND the same action on all next nodes(recursively), can be used to split the whole pipeline into single nodes before process exits.
     void detach_recursively();
     // attach myself to previous nodes(can be a list)
-    void attach_to(std::vector<std::shared_ptr<vp_node>> pre_nodes);
+    void attach_to(std::vector<std::shared_ptr<Node>> pre_nodes);
 
     // get next nodes
-    std::vector<std::shared_ptr<vp_node>> next_nodes();
+    std::vector<std::shared_ptr<Node>> next_nodes();
 
     // get description of node
     virtual std::string to_string();
