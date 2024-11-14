@@ -6,7 +6,8 @@
 
 #include "nodes/node.h"
 #include "nodes/des_node.h"
-#include "objects/shapes/vp_rect.h"
+#include "objects/shapes/rect.h"
+#include "nodes/stream_info_hookable.h"
 
 namespace tx_utils {
 
@@ -24,22 +25,22 @@ struct MetaHookerStorage {
 class NodeOnScreen {
 private:
     // orignal node in memery
-    std::shared_ptr<tx_nodes::Node> original_node = nullptr;
+    std::shared_ptr<tx_nodes::Node> original_node_ = nullptr;
     // node location and size on screen
-    tx_objects::Rect node_rect;
+    tx_objects::Rect node_rect_;
     // layer index in pipe
-    int layer;
+    int layer_;
     // nodes in next layer on screen
-    std::vector<std::shared_ptr<NodeOnScreen>> next_nodes_on_screen;
+    std::vector<std::shared_ptr<NodeOnScreen>> next_nodes_on_screen_;
 
     // period to calculate fps, milliseconds
-    int fps_epoch = 500;
+    int fps_epoch_ = 500;
 
     // reset fps if it has been long time no update, seconds
-    int fps_timeout = 5;
+    int fps_timeout_ = 5;
 
     // font for display
-    int font_face = cv::FONT_HERSHEY_SIMPLEX;
+    int font_face_ = cv::FONT_HERSHEY_SIMPLEX;
 
     // container to store data from meta hookers' callbacks
     MetaHookerStorage meta_arriving_hooker_storage;
@@ -48,10 +49,10 @@ private:
     MetaHookerStorage meta_leaving_hooker_storage;
 
     // container to store data from stream info hooker's callback
-    tx_nodes::StreamInfo stream_info_hooker_storage;
+    tx_nodes::StreamInfo stream_info_hooker_storage_;
 
     // container to store data from stream status hooker's callback
-    tx_nodes::StreamStatus stream_status_hooker_storage;
+    tx_nodes::StreamStatus stream_status_hooker_storage_;
 
     // render configure
     const int node_title_h_ = 24;
@@ -63,7 +64,7 @@ private:
     const int node_gap_vertical_ = 10;
 
 public:
-    NodeOnScreen(std::shared_ptr<tx_nodes::Node> original_node, tx_objects::vp_rect node_rect, int layer);
+    NodeOnScreen(std::shared_ptr<tx_nodes::Node> original_node, tx_objects::Rect node_rect, int layer);
     ~NodeOnScreen();
 
     // render static parts for node, which keep unchanged all the time.

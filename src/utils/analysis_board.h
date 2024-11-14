@@ -46,8 +46,8 @@ private:
     std::vector<std::shared_ptr<tx_nodes::Node>> src_nodes_in_pipe_;
 
     // cache for easy access purpose
-    std::vector<std::shared_ptr<Node_on_screen>> src_nodes_on_screen;
-    std::vector<std::shared_ptr<vp_node_on_screen>> des_nodes_on_screen;
+    std::vector<std::shared_ptr<NodeOnScreen>> src_nodes_on_screen;
+    std::vector<std::shared_ptr<NodeOnScreen>> des_nodes_on_screen;
 
     // canvas to draw
     cv::Mat bg_canvas_;
@@ -59,10 +59,10 @@ private:
     std::thread rtmp_th_;
 
     // render nodes in a layer
-    void render_layer(std::vector<std::shared_ptr<vp_node_on_screen>> nodes_in_layer, cv::Mat &canvas, bool static_parts = true);
+    void render_layer(std::vector<std::shared_ptr<NodeOnScreen>> nodes_in_layer, cv::Mat &canvas, bool static_parts = true);
 
     // map nodes in memory to screen, one layer by layer.
-    void map_nodes(std::vector<std::shared_ptr<vp_node_on_screen>> nodes_on_screen, int layer);
+    void map_nodes(std::vector<std::shared_ptr<NodeOnScreen>> nodes_on_screen, int layer);
 
     // initialize resource
     void init();
