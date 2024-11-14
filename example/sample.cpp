@@ -1,5 +1,6 @@
 #include <iostream>
 #include "utils/logger.h"
+#include "nodes/file_src_node.h"
 
 /*
  * ## 1-1-1 sample ##
@@ -14,8 +15,8 @@ int main() {
     LOGGER_INIT();
 
     // create nodes
-    // auto file_src_0 = std::make_shared<tx_nodes::tx_file_src_node>(
-    //     "file_src_0", 0, "../../workspace/face.mp4", 0.6);
+    auto file_src_0 = std::make_shared<tx_nodes::FileSrcNode>(
+        "file_src_0", 0, "../../workspace/face.mp4", 0.6);
 
     std::cout << "finish!!!" << std::endl;
     return 0;

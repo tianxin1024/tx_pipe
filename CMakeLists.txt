@@ -11,6 +11,17 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
+
+
+# OpenCV required
+find_package(OpenCV 4.6 REQUIRED)
+message(STATUS "OpenCV library status:")
+message(STATUS "    version: ${OpenCV_VERSION}")
+# message(STATUS "    libraries: ${OpenCV_LIBS}")
+# message(STATUS "    include path: ${OpenCV_INCLUDE_DIRS}")
+
+include_directories(${OpenCV_INCLUDE_DIRS})
+
 set(CXX_HEADER_DIRS "")
 set(COMMON_LIB_DIRS "")
 
