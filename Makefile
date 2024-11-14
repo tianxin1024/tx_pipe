@@ -18,7 +18,10 @@ all :
 run :
 	@cd build/bin && ./$(PRO) 
 
+debug :
+	cd debug && gdb -x ./demo.gdb
+
 clean:
 	read -r -p "This will delete the contents of build/*. Are you sure? [CRAL-C to abort]" response && rm -rf build/*
 
-.PHONY: all run test clean check-python
+.PHONY: all run debug test clean check-python

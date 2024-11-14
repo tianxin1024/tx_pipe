@@ -32,3 +32,5 @@
 *.app
 build
 workspace/video
+.cache/clangd/index
+debug
