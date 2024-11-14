@@ -2,7 +2,7 @@
 
 #include <stdexcept>
 
-namespace Excepts {
+namespace tx_excepts {
 
 class InvalidCallingError : public std::runtime_error {
 private:
@@ -19,4 +19,4 @@ inline InvalidCallingError::InvalidCallingError(const std::string &what_arg) :
 inline InvalidCallingError::~InvalidCallingError() {
 }
 
-} // namespace Excepts
+} // namespace tx_excepts

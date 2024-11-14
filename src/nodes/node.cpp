@@ -176,12 +176,12 @@ void Node::detach_recursively() {
 void Node::attach_to(std::vector<std::shared_ptr<Node>> pre_nodes) {
     // can not attach src node to any previous nodes
     if (this->node_type() == NodeType::SRC) {
-        throw Excepts::InvalidCallingError("SRC nodes must not have any previous nodes!");
+        throw tx_excepts::InvalidCallingError("SRC nodes must not have any previous nodes!");
     }
     // can not attach any nodes to des node
     for (auto i : pre_nodes) {
         if (i->node_type() == NodeType::DES) {
-            throw Excepts::InvalidCallingError("DES nodes must not have any next nodes!");
+            throw tx_excepts::InvalidCallingError("DES nodes must not have any next nodes!");
         }
         i->add_subscriber(shared_from_this());
         this->pre_nodes_.push_back(i);
