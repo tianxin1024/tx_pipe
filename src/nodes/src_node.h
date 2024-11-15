@@ -6,6 +6,7 @@
 #include "utils/gate.h"
 
 namespace tx_nodes {
+
 // base class for src nodes, start point of meta/pipeline
 class SrcNode : public Node, public StreamInfoHookable {
 private:

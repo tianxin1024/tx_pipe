@@ -9,7 +9,7 @@
 #include <opencv2/videoio.hpp>
 
 #include "nodes/node.h"
-// #include "objects/shapes/vp_rect.h"
+#include "objects/shapes/rect.h"
 
 #include "utils/node_on_screen.h"
 

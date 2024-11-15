@@ -6,6 +6,7 @@
 
 #include "nodes/node.h"
 #include "nodes/des_node.h"
+#include "nodes/src_node.h"
 #include "objects/shapes/rect.h"
 #include "nodes/stream_info_hookable.h"
 

@@ -1,6 +1,7 @@
 #include <iostream>
 #include "utils/logger.h"
 #include "nodes/file_src_node.h"
+#include "utils/analysis_board.h"
 
 /*
  * ## 1-1-1 sample ##
@@ -21,8 +22,8 @@ int main() {
     file_src_0->start();
 
     // for debug purpose
-    // tx_utils::vp_analysis_board board({file_src_0});
-    // board.display(1, false);
+    tx_utils::AnalysisBoard board({file_src_0});
+    board.display(1, false);
 
     std::cout << "finish!!!" << std::endl;
     return 0;
