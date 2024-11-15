@@ -6,7 +6,7 @@
 #include <opencv2/videoio.hpp>
 
 #include "objects/meta.h"
-// #include "vp_frame_target.h"
+#include "objects/frame_target.h"
 // #include "vp_frame_pose_target.h"
 #include "objects/frame_face_target.h"
 // #include "vp_frame_text_target.h"
@@ -67,10 +67,10 @@ public:
     // targets created/appended by primary infer nodes, and then updated by secondary infer nodes if exist.
     // it is shared_ptr<...> type just to keep same as elements.
     // deep copy needed here for this member.
-    // std::vector<std::shared_ptr<tx_objects::vp_frame_target>> targets;
+    std::vector<std::shared_ptr<tx_objects::FrameTarget>> targets;
 
     // pose targets created/appened by primary infer nodes.
-    // std::vector<std::shared_ptr<vp_objects::vp_frame_pose_target>> pose_targets;
+    // std::vector<std::shared_ptr<tx_objects::FramePoseTarget>> pose_targets;
 
     // face targets created/appened by primary infer nodes.
     std::vector<std::shared_ptr<tx_objects::FrameFaceTarget>> face_targets;

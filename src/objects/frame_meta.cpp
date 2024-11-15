@@ -29,9 +29,10 @@ FrameMeta::FrameMeta(const FrameMeta &meta) :
     this->mask_ = meta.mask_.clone();
 
     // deep copy targets
-    // for (auto &i : meta.targets) {
-    //     this->targets_.push_back(i->clone());
-    // }
+    for (auto &i : meta.targets) {
+        this->targets.push_back(i->clone());
+    }
+
     // // deep copy pose targets
     // for (auto &i : meta.pose_targets_) {
     //     this->pose_targets.push_back(i->clone());

@@ -4,3 +4,10 @@ add_library(yunet_face_detector_node STATIC yunet_face_detector_node.cpp)
 set_property(TARGET yunet_face_detector_node PROPERTY POSITION_INDEPENDENT_CODE ON)
 target_link_libraries(yunet_face_detector_node PUBLIC primary_infer_node frame_meta frame_face_target)
 
+add_library(secondary_infer_node STATIC secondary_infer_node.cpp)
+set_property(TARGET secondary_infer_node PROPERTY POSITION_INDEPENDENT_CODE ON)
+target_link_libraries(secondary_infer_node PUBLIC infer_node)
+
+add_library(sface_feature_encoder_node STATIC sface_feature_encoder_node.cpp)
+set_property(TARGET sface_feature_encoder_node PROPERTY POSITION_INDEPENDENT_CODE ON)
+target_link_libraries(sface_feature_encoder_node PUBLIC secondary_infer_node)
