@@ -36,10 +36,10 @@ FrameMeta::FrameMeta(const FrameMeta &meta) :
     // for (auto &i : meta.pose_targets_) {
     //     this->pose_targets.push_back(i->clone());
     // }
-    // // deep copy face targets
-    // for (auto &i : meta.face_targets) {
-    //     this->face_targets.push_back(i->clone());
-    // }
+    // deep copy face targets
+    for (auto &i : meta.face_targets) {
+        this->face_targets.push_back(i->clone());
+    }
     // // deep copy text targets
     // for (auto &i : meta.text_targets) {
     //     this->text_targets.push_back(i->clone());

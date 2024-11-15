@@ -8,7 +8,7 @@
 #include "objects/meta.h"
 // #include "vp_frame_target.h"
 // #include "vp_frame_pose_target.h"
-// #include "vp_frame_face_target.h"
+#include "objects/frame_face_target.h"
 // #include "vp_frame_text_target.h"
 // #include "ba/vp_ba_result.h"
 
@@ -73,7 +73,7 @@ public:
     // std::vector<std::shared_ptr<vp_objects::vp_frame_pose_target>> pose_targets;
 
     // face targets created/appened by primary infer nodes.
-    // std::vector<std::shared_ptr<vp_objects::vp_frame_face_target>> face_targets;
+    std::vector<std::shared_ptr<tx_objects::FrameFaceTarget>> face_targets;
 
     // text targets created/appened by primary infer nodes.
     // std::vector<std::shared_ptr<vp_objects::vp_frame_text_target>> text_targets;

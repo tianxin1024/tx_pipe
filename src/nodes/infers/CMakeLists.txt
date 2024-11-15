@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.10)
+
+add_library(yunet_face_detector_node STATIC yunet_face_detector_node.cpp)
+set_property(TARGET yunet_face_detector_node PROPERTY POSITION_INDEPENDENT_CODE ON)
+target_link_libraries(yunet_face_detector_node PUBLIC primary_infer_node frame_meta frame_face_target)
+

@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 
+add_subdirectory(infers)
+
 add_library(meta_subscriber STATIC meta_subscriber.cpp)
 set_property(TARGET meta_subscriber PROPERTY POSITION_INDEPENDENT_CODE ON)
 
@@ -21,4 +23,14 @@ target_link_libraries(src_node PUBLIC node)
 
 add_library(file_src_node STATIC file_src_node.cpp)
 set_property(TARGET file_src_node PROPERTY POSITION_INDEPENDENT_CODE ON)
-target_link_libraries(file_src_node PUBLIC src_node opencv_core opencv_imgproc opencv_highgui ${DEPEND_LIBS})
+target_link_libraries(file_src_node PUBLIC src_node opencv_core opencv_imgproc opencv_highgui opencv_video ${DEPEND_LIBS})
+
+add_library(infer_node STATIC infer_node.cpp)
+set_property(TARGET infer_node PROPERTY POSITION_INDEPENDENT_CODE ON)
+target_link_libraries(infer_node PUBLIC opencv_dnn)
+
+add_library(primary_infer_node STATIC primary_infer_node.cpp)
+set_property(TARGET primary_infer_node PROPERTY POSITION_INDEPENDENT_CODE ON)
+target_link_libraries(primary_infer_node PUBLIC infer_node)
+
+

@@ -34,3 +34,4 @@ build
 workspace/video
 .cache/clangd/index
 debug
+workspace/onnx
