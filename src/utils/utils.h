@@ -98,6 +98,16 @@ inline bool ends_with(std::string const &value, std::string const &ending) {
     return std::equal(ending.rbegin(), ending.rend(), value.rbegin());
 }
 
+inline std::vector<std::string> string_split(const std::string &s, char delimiter) {
+    std::vector<std::string> tokens;
+    std::string token;
+    std::istringstream tokenStream(s);
+    while (std::getline(tokenStream, token, delimiter)) {
+        tokens.push_back(token);
+    }
+    return tokens;
+}
+
 // round double data using specific precision, return string.
 inline std::string round_any(double input, int precision) {
     input = input * std::pow(10, precision) + 0.5;

@@ -4,6 +4,7 @@
 #include "utils/analysis_board.h"
 #include "nodes/infers/yunet_face_detector_node.h"
 #include "nodes/infers/sface_feature_encoder_node.h"
+#include "nodes/osd/face_osd_node_v2.h"
 
 /*
  * ## 1-1-1 sample ##
@@ -24,13 +25,13 @@ int main() {
         "yunet_face_detector_0", "../../workspace/onnx/face_detection_yunet_2022mar.onnx");
     auto sface_face_encoder_0 = std::make_shared<tx_nodes::SfaceFeatureEncoderNode>(
         "sface_face_encoder_0", "../../workspace/onnx/face_recognition_sface_2021dec.onnx");
-    // auto osd_0 = std::make_shared<vp_nodes::vp_face_osd_node_v2>("osd_0");
+    auto osd_0 = std::make_shared<tx_nodes::FaceOsdNode_v2>("osd_0");
     // auto screen_des_0 =
     //     std::make_shared<vp_nodes::vp_screen_des_node>("screen_des_0", 0);
 
     // construct pipeline
-    // yunet_face_detector_0->attach_to({file_src_0});
-    // sface_face_encoder_0->attach_to({yunet_face_detector_0});
+    yunet_face_detector_0->attach_to({file_src_0});
+    sface_face_encoder_0->attach_to({yunet_face_detector_0});
     // osd_0->attach_to({sface_face_encoder_0});
 
     yunet_face_detector_0->attach_to({file_src_0});
