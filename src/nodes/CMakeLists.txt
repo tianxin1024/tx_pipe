@@ -34,4 +34,9 @@ add_library(primary_infer_node STATIC primary_infer_node.cpp)
 set_property(TARGET primary_infer_node PROPERTY POSITION_INDEPENDENT_CODE ON)
 target_link_libraries(primary_infer_node PUBLIC infer_node)
 
+add_library(screen_des_node STATIC screen_des_node.cpp)
+set_property(TARGET screen_des_node PROPERTY POSITION_INDEPENDENT_CODE ON)
+target_link_libraries(screen_des_node PUBLIC des_node ${OpenCV_LIBS} ${GSTREAMER_LIBRARIES})
+
+
 
