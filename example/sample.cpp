@@ -25,7 +25,7 @@ int main() {
         "yunet_face_detector_0", "../../workspace/onnx/face_detection_yunet_2022mar.onnx");
     auto sface_face_encoder_0 = std::make_shared<tx_nodes::SfaceFeatureEncoderNode>(
         "sface_face_encoder_0", "../../workspace/onnx/face_recognition_sface_2021dec.onnx");
-    auto osd_0 = std::make_shared<tx_nodes::FaceOsdNode_v2>("osd_0");
+    auto osd_0 = std::make_shared<tx_nodes::FaceOsdNodeV2>("osd_0");
     // auto screen_des_0 =
     //     std::make_shared<vp_nodes::vp_screen_des_node>("screen_des_0", 0);
 
