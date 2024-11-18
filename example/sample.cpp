@@ -40,6 +40,8 @@ int main() {
     tx_utils::AnalysisBoard board({file_src_0});
     board.display(1, false);
 
-    std::cout << "finish!!!" << std::endl;
+    std::string wait;
+    std::getline(std::cin, wait);
+    file_src_0->detach_recursively();
     return 0;
 }
