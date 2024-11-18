@@ -104,6 +104,7 @@ public:
 }; // class tx_logger
 
 // config Macros
+#define SET_LOG_LEVEL(_log_level) tx_utils::Logger::get_logger().log_level_ = _log_level
 #define SET_LOG_INCLUDE_CODE_LOCATION(_include_code_location) tx_utils::Logger::get_logger().include_code_location_ = _include_code_location
 #define SET_LOG_INCLUDE_THREAD_ID(_include_thread_id) tx_utils::Logger::get_logger().include_thread_id_ = _include_thread_id
 
