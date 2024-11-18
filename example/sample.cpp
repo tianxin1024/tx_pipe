@@ -33,6 +33,7 @@ int main() {
     yunet_face_detector_0->attach_to({file_src_0});
     sface_face_encoder_0->attach_to({yunet_face_detector_0});
     osd_0->attach_to({sface_face_encoder_0});
+    screen_des_0->attach_to({osd_0});
 
     file_src_0->start();
 

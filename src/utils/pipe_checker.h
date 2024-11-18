@@ -49,9 +49,9 @@ private:
             auto _num = next_nodes.size();
 
             // check for the last layer, all nodes MUST be tx_nodes::Node_type::DES
-            // if (_num == 0 && i->node_type() != tx_nodes::NodeType::DES) {
-            //     throw tx_excepts::InvalidPipelineError("pipe MUST ends with DES nodes!");
-            // }
+            if (_num == 0 && i->node_type() != tx_nodes::NodeType::DES) {
+                throw tx_excepts::InvalidPipelineError("pipe MUST ends with DES nodes!");
+            }
 
             // initialize next_nodes_num variable, all nodes in current layer should have the same next_nodes_num.
             if (next_nodes_num == -1) {
