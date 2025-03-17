@@ -16,10 +16,10 @@ add_compile_options(-Wno-deprecated-declarations)
 
 # OpenCV required
 find_package(OpenCV 4.6 REQUIRED)
-# message(STATUS "OpenCV library status:")
-# message(STATUS "    version: ${OpenCV_VERSION}")
-# message(STATUS "    libraries: ${OpenCV_LIBS}")
-# message(STATUS "    include path: ${OpenCV_INCLUDE_DIRS}")
+message(STATUS "OpenCV library status:")
+message(STATUS "    version: ${OpenCV_VERSION}")
+message(STATUS "    libraries: ${OpenCV_LIBS}")
+message(STATUS "    include path: ${OpenCV_INCLUDE_DIRS}")
 
 
 # Gstreamer required

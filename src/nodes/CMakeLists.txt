@@ -38,5 +38,10 @@ add_library(screen_des_node STATIC screen_des_node.cpp)
 set_property(TARGET screen_des_node PROPERTY POSITION_INDEPENDENT_CODE ON)
 target_link_libraries(screen_des_node PUBLIC des_node ${OpenCV_LIBS} ${GSTREAMER_LIBRARIES})
 
+add_library(rk_rtsp_src_node STATIC rk_rtsp_src_node.cpp)
+set_property(TARGET rk_rtsp_src_node PROPERTY POSITION_INDEPENDENT_CODE ON)
+target_link_libraries(rk_rtsp_src_node PUBLIC src_node ${OpenCV_LIBS})
+
+
 
 

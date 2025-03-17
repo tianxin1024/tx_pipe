@@ -11,3 +11,7 @@ target_link_libraries(secondary_infer_node PUBLIC infer_node)
 add_library(sface_feature_encoder_node STATIC sface_feature_encoder_node.cpp)
 set_property(TARGET sface_feature_encoder_node PROPERTY POSITION_INDEPENDENT_CODE ON)
 target_link_libraries(sface_feature_encoder_node PUBLIC secondary_infer_node)
+
+add_library(rk_first_yolo STATIC rk_first_yolo.cpp)
+set_property(TARGET rk_first_yolo PROPERTY POSITION_INDEPENDENT_CODE ON)
+target_link_libraries(rk_first_yolo PUBLIC primary_infer_node)

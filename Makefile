@@ -1,5 +1,5 @@
 CXX      = g++
-PRO      = demo
+PRO      = rk_demo
 
 SPACE   ?= $(PWD)
 LIBDIR  ?= $(SPACE)/lib
